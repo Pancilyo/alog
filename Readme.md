@@ -44,10 +44,10 @@ logger.Fatal("测试的Fatal信息")
 ## 设置输出模式
 
 ```go
-logger := alog.New()					// 默认为控制台模式
-logger := alog.New().SetFileMode()		// 文件模式
-logger := alog.New().SetConsoleMode()	// 控制台模式
-logger := alog.New().SetBothMode() 		// 控制台+文件模式
+logger := alog.New()                  // 默认为控制台模式
+logger := alog.New().SetFileMode()    // 文件模式
+logger := alog.New().SetConsoleMode() // 控制台模式
+logger := alog.New().SetBothMode()    // 控制台+文件模式
 ```
 
 ## 设置输出文件相关
