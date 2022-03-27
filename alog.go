@@ -38,11 +38,11 @@ const (
 
 // Logger 日志接口
 type Logger interface {
-	Debug(format string, a ...interface{})
-	Info(format string, a ...interface{})
-	Warn(format string, a ...interface{})
-	Error(format string, a ...interface{})
-	Fatal(format string, a ...interface{})
+	Debug(format interface{}, a ...interface{})
+	Info(format interface{}, a ...interface{})
+	Warn(format interface{}, a ...interface{})
+	Error(format interface{}, a ...interface{})
+	Fatal(format interface{}, a ...interface{})
 }
 
 // Log 日志对象
@@ -105,7 +105,7 @@ func (l *Log) SetFilePath(path string) *Log {
 	return l
 }
 
-// SetFilePath 设置输出文件的名字
+// SetFileName 设置输出文件的名字
 func (l *Log) SetFileName(name string) *Log {
 	if l.FLogger != nil {
 		l.FLogger.fileName = name
@@ -176,7 +176,7 @@ func (l *Log) Close() {
 	}
 }
 
-func (l *Log) Debug(format string, a ...interface{}) {
+func (l *Log) Debug(format interface{}, a ...interface{}) {
 	if l.FLogger != nil && !l.isClose {
 		l.FLogger.Debug(format, a...)
 	}
@@ -185,7 +185,7 @@ func (l *Log) Debug(format string, a ...interface{}) {
 	}
 
 }
-func (l *Log) Info(format string, a ...interface{}) {
+func (l *Log) Info(format interface{}, a ...interface{}) {
 	if l.FLogger != nil && !l.isClose {
 		l.FLogger.Info(format, a...)
 	}
@@ -193,7 +193,7 @@ func (l *Log) Info(format string, a ...interface{}) {
 		l.CLogger.Info(format, a...)
 	}
 }
-func (l *Log) Warn(format string, a ...interface{}) {
+func (l *Log) Warn(format interface{}, a ...interface{}) {
 	if l.FLogger != nil && !l.isClose {
 		l.FLogger.Warn(format, a...)
 	}
@@ -201,7 +201,7 @@ func (l *Log) Warn(format string, a ...interface{}) {
 		l.CLogger.Warn(format, a...)
 	}
 }
-func (l *Log) Error(format string, a ...interface{}) {
+func (l *Log) Error(format interface{}, a ...interface{}) {
 	if l.FLogger != nil && !l.isClose {
 		l.FLogger.Error(format, a...)
 	}
@@ -209,7 +209,7 @@ func (l *Log) Error(format string, a ...interface{}) {
 		l.CLogger.Error(format, a...)
 	}
 }
-func (l *Log) Fatal(format string, a ...interface{}) {
+func (l *Log) Fatal(format interface{}, a ...interface{}) {
 	if l.FLogger != nil && !l.isClose {
 		l.FLogger.Fatal(format, a...)
 	}

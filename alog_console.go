@@ -25,27 +25,27 @@ func (c *consoleLogger) enable(logeLevel Level) bool {
 }
 
 // log 格式化输出内容
-func (c *consoleLogger) log(lv Level, format string, a ...interface{}) {
+func (c *consoleLogger) log(lv Level, format interface{}, a ...interface{}) {
 	if c.enable(lv) {
-		msg := fmt.Sprintf(format, a...)
+		msg := fmt.Sprintf(fmt.Sprintf("%v", format), a...)
 		now := time.Now()
 		fileName, funcName, lineNo := traceInfo(4)
 		fmt.Printf("[%s] [%s] [%s:%s:%d] %s\n", now.Format(c.timeFormat),
 			l2S(lv), fileName, funcName, lineNo, msg)
 	}
 }
-func (c *consoleLogger) Debug(format string, a ...interface{}) {
+func (c *consoleLogger) Debug(format interface{}, a ...interface{}) {
 	c.log(DEBUG, format, a...)
 }
-func (c *consoleLogger) Info(format string, a ...interface{}) {
+func (c *consoleLogger) Info(format interface{}, a ...interface{}) {
 	c.log(INFO, format, a...)
 }
-func (c *consoleLogger) Warn(format string, a ...interface{}) {
+func (c *consoleLogger) Warn(format interface{}, a ...interface{}) {
 	c.log(WARN, format, a...)
 }
-func (c *consoleLogger) Error(format string, a ...interface{}) {
+func (c *consoleLogger) Error(format interface{}, a ...interface{}) {
 	c.log(ERROR, format, a...)
 }
-func (c *consoleLogger) Fatal(format string, a ...interface{}) {
+func (c *consoleLogger) Fatal(format interface{}, a ...interface{}) {
 	c.log(FATAL, format, a...)
 }

@@ -214,11 +214,11 @@ func (f *fileLogger) enable(lv Level) bool {
 }
 
 // log 记录日志的方法
-func (f *fileLogger) log(lv Level, format string, a ...interface{}) {
+func (f *fileLogger) log(lv Level, format interface{}, a ...interface{}) {
 	if f.enable(lv) {
-		msg := fmt.Sprintf(format, a...)           // 拼装消息
-		now := time.Now()                          // 获取时间
-		fileName, funcName, lineNo := traceInfo(4) // 获取输出此信息的文件名函数名行号
+		msg := fmt.Sprintf(fmt.Sprintf("%v", format), a...) // 拼装消息
+		now := time.Now()                                   // 获取时间
+		fileName, funcName, lineNo := traceInfo(4)          // 获取输出此信息的文件名函数名行号
 		// 先把日志发送到通道中
 		logTmp := &logMsg{
 			level:     lv,
@@ -235,18 +235,18 @@ func (f *fileLogger) log(lv Level, format string, a ...interface{}) {
 		}
 	}
 }
-func (f *fileLogger) Debug(format string, a ...interface{}) {
+func (f *fileLogger) Debug(format interface{}, a ...interface{}) {
 	f.log(DEBUG, format, a...)
 }
-func (f *fileLogger) Info(format string, a ...interface{}) {
+func (f *fileLogger) Info(format interface{}, a ...interface{}) {
 	f.log(INFO, format, a...)
 }
-func (f *fileLogger) Warn(format string, a ...interface{}) {
+func (f *fileLogger) Warn(format interface{}, a ...interface{}) {
 	f.log(WARN, format, a...)
 }
-func (f *fileLogger) Error(format string, a ...interface{}) {
+func (f *fileLogger) Error(format interface{}, a ...interface{}) {
 	f.log(ERROR, format, a...)
 }
-func (f *fileLogger) Fatal(format string, a ...interface{}) {
+func (f *fileLogger) Fatal(format interface{}, a ...interface{}) {
 	f.log(FATAL, format, a...)
 }
